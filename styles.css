@@ -1,0 +1,467 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #4361ee;
+    --primary-dark: #3046c5;
+    --secondary-color: #48bfe3;
+    --accent-color: #56cfe1;
+    --dark-color: #2b2d42;
+    --light-color: #f8f9fa;
+    --border-radius: 8px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', 'SF Pro Text', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background: linear-gradient(135deg, #e0f7fa 0%, #e1f5fe 100%);
+    padding: 30px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 40px;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+}
+
+h2 {
+    margin: 15px 0;
+    color: var(--dark-color);
+    font-size: 1.3rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+h2::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    background-color: var(--primary-color);
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.upload-section, .preview-section, .download-section {
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.upload-section:hover, .preview-section:hover, .download-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* タブスタイル */
+.tab-container {
+    margin: 20px 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.tab-header {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--dark-color);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-align: center;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    background-color: white;
+}
+
+.tab-btn.active::before {
+    transform: scaleX(1);
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* コード入力エリア */
+.code-input-container {
+    width: 100%;
+}
+
+.code-type-selector {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.code-type-selector label {
+    margin-right: 20px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.code-type-selector label:hover {
+    background-color: rgba(72, 191, 227, 0.1);
+}
+
+.code-type-selector input[type="radio"] {
+    margin-right: 5px;
+}
+
+#codeTextarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    font-family: monospace;
+    font-size: 14px;
+    resize: vertical;
+    background-color: #f8f9fa;
+    transition: var(--transition);
+}
+
+#codeTextarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.file-upload-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+    padding: 10px;
+}
+
+.file-upload-info p {
+    margin: 5px 0;
+    color: var(--dark-color);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.file-types {
+    font-size: 0.8rem;
+    color: rgba(43, 45, 66, 0.6) !important;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 20px 0;
+    width: 100%;
+    border: 2px dashed var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgba(72, 191, 227, 0.05);
+    transition: var(--transition);
+}
+
+input[type="file"]:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(67, 97, 238, 0.05);
+}
+
+.format-options {
+    margin: 20px 0;
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.format-options h3 {
+    margin: 0 20px 0 0;
+    white-space: nowrap;
+}
+
+.format-options label {
+    margin-right: 20px;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background-color: transparent;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+}
+
+.format-options label:hover {
+    background-color: rgba(72, 191, 227, 0.1);
+}
+
+.format-options input[type="radio"] {
+    margin-right: 5px;
+}
+
+button, #downloadBtn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button::before, #downloadBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+button:hover, #downloadBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+}
+
+button:hover::before, #downloadBtn:hover::before {
+    width: 100%;
+}
+
+button:active, #downloadBtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(67, 97, 238, 0.4);
+}
+
+#previewContainer {
+    min-height: 400px;
+    max-height: 600px; /* 最大高さを設定 */
+    border: 1px dashed var(--secondary-color);
+    padding: 15px 15px 15px 35px; /* 左側の余白を増やす */
+    margin-top: 15px;
+    overflow: auto;
+    background-color: white;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#previewContainer:hover {
+    border-color: var(--primary-color);
+}
+
+#resultContainer {
+    text-align: center;
+    min-height: 400px;
+    max-height: 800px; /* 最大高さを設定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: auto;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+#resultContainer img {
+    max-width: 100%;
+    border: 1px solid #eee;
+    margin: 15px 0;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    background-color: white;
+    padding: 5px 5px 5px 25px; /* 左側のパディングを増やす */
+}
+
+#resultContainer img:hover {
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+#downloadBtn {
+    display: none;
+    margin: 20px auto;
+    text-align: center;
+    position: relative;
+}
+
+.error-message {
+    color: #e74c3c;
+    margin-top: 15px;
+    text-align: center;
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid #e74c3c;
+}
+
+.selected-file-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 8px 15px;
+    background-color: rgba(72, 191, 227, 0.1);
+    border-radius: 20px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.selected-file-info i {
+    color: #4CAF50;
+    margin-right: 8px;
+}
+
+.highlight {
+    border-color: var(--primary-color) !important;
+    background-color: rgba(67, 97, 238, 0.1) !important;
+    transform: scale(1.02);
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        padding: 25px;
+    }
+    
+    .format-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .format-options h3 {
+        margin-bottom: 10px;
+    }
+    
+    input[type="file"] {
+        padding: 15px;
+    }
+}
