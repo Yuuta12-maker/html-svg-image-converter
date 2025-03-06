@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML/SVG to JPG/PNG Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-exchange-alt"></i> HTML/SVG から JPG/PNG 変換ツール</h1>
+        
+        <div class="upload-section">
+            <h2><i class="fas fa-upload"></i> HTMLまたはSVGファイルをアップロード</h2>
+            
+            <div class="tab-container">
+                <div class="tab-header">
+                    <button class="tab-btn active" data-tab="file-upload">ファイルアップロード</button>
+                    <button class="tab-btn" data-tab="code-input">コード入力</button>
+                </div>
+                
+                <div class="tab-content active" id="file-upload">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="fileInput" accept=".html,.svg" />
+                        <div class="file-upload-info">
+                            <i class="fas fa-file-code fa-3x"></i>
+                            <p style="margin-top: 10px;">ファイルをドラッグ＆ドロップするか、クリックして選択</p>
+                            <p class="file-types">対応ファイル: .html, .svg</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="code-input">
+                    <div class="code-input-container">
+                        <div class="code-type-selector">
+                            <label>
+                                <input type="radio" name="codeType" value="html" checked> HTML
+                            </label>
+                            <label>
+                                <input type="radio" name="codeType" value="svg"> SVG
+                            </label>
+                        </div>
+                        <textarea id="codeTextarea" placeholder="ここにHTMLまたはSVGコードを貼り付けてください..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="format-options">
+                <h3><i class="fas fa-image"></i> 出力形式:</h3>
+                <label>
+                    <input type="radio" name="format" value="png" checked> PNG
+                </label>
+                <label>
+                    <input type="radio" name="format" value="jpeg"> JPG
+                </label>
+            </div>
+            <button id="convertBtn"><i class="fas fa-sync-alt"></i> 変換</button>
+        </div>
+        
+        <div class="preview-section">
+            <h2><i class="fas fa-eye"></i> プレビュー</h2>
+            <div id="previewContainer"></div>
+        </div>
+        
+        <div class="download-section">
+            <h2><i class="fas fa-image"></i> 変換結果</h2>
+            <div id="resultContainer">
+                <i class="fas fa-arrow-circle-down fa-3x" style="margin-bottom: 15px; color: #ccc;"></i>
+                <p style="margin-top: 5px;">変換した画像がここに表示されます</p>
+            </div>
+            <a id="downloadBtn" download="converted-image" style="display:none;"><i class="fas fa-download"></i> 画像をダウンロード</a>
+        </div>
+        
+        <footer>
+            <p>HTML/SVGからJPG/PNG変換ツール © 2025</p>
+        </footer>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- CSSフォントのレンダリングサポート向上用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.3.0/fontfaceobserver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
